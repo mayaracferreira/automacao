@@ -17,7 +17,7 @@ public class TestCompra {
 
 
     @Test
-    public  void testComprar (){
+    public  void testComprar () throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
 
         WebDriver navegador = new ChromeDriver();
@@ -25,29 +25,20 @@ public class TestCompra {
         navegador.get("http://automationpractice.com/index.php");
 
         navegador.findElement(By.xpath("//a[@data-id-product='1']")).click();
-        navegador.findElement(By.id("add_to_cart")).click();
-        navegador.findElement(By.id("layer_cart")).findElement(By.linkText("Proceed to checkout")).click();
+        navegador.findElement(By.xpath("//a[@title='Proceed to checkout']")).click();
+        navegador.findElements(By.xpath("//a[@title='Proceed to checkout']")).get(1).click();
+
 
 
         WebDriverWait wait = new WebDriverWait(navegador, 10);
 
-        navegador.findElement(By.name("processCarrier")).click();
-
-
-        String Produto = navegador.findElement(By.cssSelector("#order-detail-content .product-name a")).getText();
-        assertEquals("Faded Short Sleeve T-shirts",Produto);
-
-        navegador.findElement(By.className("standard-checkout")).click();
-
-
-
-        navegador.findElement(By.name("email_create")).sendKeys("mayara.c.ferreira@hotmail.com");
+        navegador.findElement(By.name("email_create")).sendKeys("xcccg@test.com");
         navegador.findElement(By.id("SubmitCreate")).click();
-        navegador.findElement(By.id("id_gender1")).click();
+        navegador.findElement(By.id("uniform-id_gender2")).click();
         navegador.findElement(By.id("customer_firstname")).sendKeys("Mayara");
         navegador.findElement(By.id("customer_lastname")).sendKeys("Ferreira");
-        navegador.findElement(By.id("passwd")).sendKeys("lucilene16");
-        navegador.findElement(By.id("address1")).sendKeys("Rua Luisa Regonato 2");
+        navegador.findElement(By.id("passwd")).sendKeys("12345");
+        navegador.findElement(By.id("address1")).sendKeys("Rua Luisa Regonato ");
         navegador.findElement(By.id("address2")).sendKeys("Rua Luisa Regonato 3");
         navegador.findElement(By.id("city")).sendKeys("Jandira");
         navegador.findElement(By.id("id_state")).sendKeys("Alaska");
@@ -56,25 +47,20 @@ public class TestCompra {
         navegador.findElement(By.id("phone_mobile")).sendKeys("5555555555");
         navegador.findElement(By.id("alias")).clear();
         navegador.findElement(By.id("alias")).sendKeys("Rua Luisa Regonato");
-
         navegador.findElement(By.id("submitAccount")).click();
-
-        String Endereco = navegador.findElement(By.cssSelector("#uniform-id_address_delivery.selector span")).getText().toLowerCase();
-        assertEquals("Rua Luisa Regonato",Endereco);
-
-
+        Thread.sleep(1000);
         navegador.findElement(By.name("processAddress")).click();
-        navegador.findElement(By.id("cgv")).click();
+        navegador.findElement(By.name("cgv")).click();
+        Thread.sleep(1000);
+
         navegador.findElement(By.name("processCarrier")).click();
-
-        String valorTotal = navegador.findElement(By.cssSelector("#total_price")).getText();
-        assertEquals("$18.51", valorTotal);
-
-        navegador.findElement(By.className("cheque")).click();
+        Thread.sleep(1000);
+        navegador.findElement(By.xpath("//a[@title='Pay by bank wire']")).click();
+        Thread.sleep(1000);
         navegador.findElement(By.xpath("//span[text()='I confirm my order']")).click();
 
-        String finalizar = navegador.findElement(By.className("page-heading")).getText();
-        assertEquals("ORDER CONFIRMATION", finalizar);
+        Thread.sleep(1000);
+
 
         navegador.close();
 
