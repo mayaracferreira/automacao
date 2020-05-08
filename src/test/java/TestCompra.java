@@ -1,6 +1,3 @@
-package compra;
-
-
 import org.junit.Test;
 
 import  static org.junit.Assert.assertEquals;
@@ -19,13 +16,13 @@ public class TestCompra extends BaseTest{
     public  void testComprar () throws InterruptedException {
         String produto = "//a[@data-id-product='1']";
         index.acessarAplicacao();
-        index.selecionarProduto("//a[@data-id-product='1']");
+        index.selecionarProduto();
         Thread.sleep( 3000);
         cadastro.cadastrarUsuario("teste12354@test.com.br");
         cadastro.dadosUsuario();
         cadastro.confirmarCadastro();
-        pagamento.confirmarPagamento();
-        compra.confirmarDadosdeCompra();
+        pagamento.ConfirmarPagamento();
+        compra.ConfirmarDadosdeCompra();
 
 
     }
